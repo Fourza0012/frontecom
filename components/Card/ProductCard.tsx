@@ -1,18 +1,20 @@
+import { priceFormat } from '@/function/utils';
+import { productItem } from '@/mockup/productList';
 import { Card, Typography, Button } from 'antd'
 import Link from 'next/link';
 const { Meta } = Card
 const { Text } = Typography;
 
-export default function ProductCard () {
+export default function ProductCard (props: productItem) {
     return (
         <Card
             hoverable
-            cover={<img alt="example" src="/product/product-image.svg" />}
+            cover={<img alt={props.name} src={props.img} />}
           >
-            <Meta title="Brandix Angle Grinder KZX3890PQW" />
+            <Meta title={props.name} />
             <div style={{ display:'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '20px' }}>
-             <Text strong style={{ fontSize: '16px' }}>$649.00</Text>
-             <Link href='/product/[id]' as={`/product/${123}`}>
+             <Text strong style={{ fontSize: '16px' }}>{priceFormat(props.price)}</Text>
+             <Link href='/product/[id]' as={`/product/${props.id}`}>
              <Button type='primary'>Detail</Button>
              </Link>
             </div>

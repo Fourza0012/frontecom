@@ -2,29 +2,36 @@ import { useRouter } from "next/router"
 import { Button, Col, Divider, Image, Row, Space, Typography } from 'antd';
 import ProductCard from "@/components/Card/ProductCard";
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { useEffect, useState } from "react";
+import { productItem, productLists } from "@/mockup/productList";
+import { findProduct, priceFormat } from "@/function/utils";
 
 const { Title, Paragraph, Text } = Typography
 
 export default function ProductDetail () {
     const { query } = useRouter()
-    console.log('query', query)
+    const [currentItem, setCurrentItem] = useState<productItem>()
+    useEffect(() => {
+        setCurrentItem(findProduct(query?.id))
+    }, [query])
     return (
     <>
+    {currentItem && 
     <Row gutter={20}>
         <Col offset={5} span={6}>
-        <Image style={{ border: '1px #C5C5C5 solid' }} width='100%' src='/product/product-image.svg' />
+        <Image style={{ border: '1px #C5C5C5 solid' }} width='100%' src={currentItem.img} alt={currentItem.name} />
         </Col>
         <Col span={8}>
-            <Title style={{ marginTop: '0px' }}>Product</Title>
+            <Title style={{ marginTop: '0px' }}>{currentItem.name}</Title>
             <Paragraph style={{ color: '#6F6F6F' }}>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus cupiditate quae optio earum quo? Quasi itaque veritatis accusantium maiores impedit ducimus dicta aliquid id? Dignissimos maxime doloremque quis aspernatur vitae.
+                {currentItem.description}
             </Paragraph>
             <Divider />
             <Space direction='vertical'>
                 <div>
-                    <Text strong style={{ color: '#6F6F6F' }}>Availability: </Text> <Text type='success'>In Stock</Text>
+                    <Text strong style={{ color: '#6F6F6F' }}>Availability: </Text> <Text type={currentItem.status ? 'success' : 'danger'}>{currentItem.status ? 'In Stock' : 'Out of Stock'}</Text>
                 </div>
-                <Text style={{ fontSize: '24px' }} strong>$649.00</Text>
+                <Text style={{ fontSize: '24px' }} strong>{priceFormat(currentItem.price)}</Text>
                 <Space size='large'>
                     <Space size='large' style={{ border: '1px #e7e7e7 solid' }}>
                         <Button type="text" icon={<MinusOutlined />} />
@@ -35,18 +42,14 @@ export default function ProductDetail () {
                 </Space>
             </Space>
         </Col>
-    </Row>
+    </Row>}
       <Title level={2}>Related Product</Title>
       <Divider />
       <Space size='small' style={{ paddingBottom: '5px', overflow: 'auto', width: '100%' }}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        {/* <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard /> */}
+        <ProductCard {...productLists[0]} />
+        <ProductCard {...productLists[3]} />
+        <ProductCard {...productLists[6]} />
+        <ProductCard {...productLists[2]} />
       </Space>
     </>
     )
