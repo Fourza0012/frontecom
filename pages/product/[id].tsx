@@ -45,11 +45,10 @@ export default function ProductDetail () {
     </Row>}
       <Title level={2}>Related Product</Title>
       <Divider />
-      <Space size='small' style={{ paddingBottom: '5px', overflow: 'auto', width: '100%' }}>
-        <ProductCard {...productLists[0]} />
-        <ProductCard {...productLists[3]} />
-        <ProductCard {...productLists[6]} />
-        <ProductCard {...productLists[2]} />
+      <Space size='large' style={{ paddingBottom: '5px', overflow: 'auto', width: '100%' }}>
+        {currentItem?.related && currentItem?.related.map(item => (
+            <ProductCard {...productLists[item]} />
+        ))}
       </Space>
     </>
     )

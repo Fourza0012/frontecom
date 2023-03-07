@@ -1,6 +1,10 @@
 import { ReactNode, CSSProperties } from 'react'
-import { Layout, Image, Button, Space, Typography } from 'antd'
+import { Layout, Image, Button, Space, Typography, Popover, Card, Avatar } from 'antd'
 import Link from 'next/link';
+import { useUser } from '@/hooks/user';
+import { SettingOutlined,LogoutOutlined,ShoppingCartOutlined } from '@ant-design/icons';
+
+const { Meta } = Card;
 
 const { Text } = Typography;
 
@@ -25,24 +29,14 @@ const footerStyle: CSSProperties = {
 }
 
 export default function NormalBody ({ children } : { children: ReactNode }) {
+    const { userData } = useUser()
     return (
             <Layout style={{ minHeight: '100vh', backgroundColor: '#fff' }}>
                 <Header style={headerStyle}>
                     <Link href='/'>
                         <Image src='/logo/logo.svg' preview={false} />
                     </Link>
-                    <Space>
-                        <Link href='/register'>
-                            <Button size='large'>
-                                <Text strong>Sign In</Text>
-                            </Button>
-                        </Link>
-                        <Link href='/login'>
-                        <Button size='large' type='text'>
-                            <Text style={{ color: 'white' }} strong>Login</Text>
-                        </Button>
-                        </Link>
-                    </Space>
+                   {userData ? <UserMenu /> : <NoUserMenu />}
                 </Header>
                 <Content style={contentStyle}>
                     {children}
@@ -51,5 +45,58 @@ export default function NormalBody ({ children } : { children: ReactNode }) {
                 Powered by React - Design by Four
                 </Footer>
             </Layout>
+    )
+}
+
+function NoUserMenu () {
+    return (
+        <Space>
+            <Link href='/register'>
+                <Button size='large'>
+                    <Text strong>Sign In</Text>
+                </Button>
+            </Link>
+            <Link href='/login'>
+                <Button size='large' type='text'>
+                    <Text style={{ color: 'white' }} strong>Login</Text>
+                </Button>
+            </Link>
+        </Space>
+    )
+}
+
+function CartButton () {
+    return (
+        <>
+      <Link href='/cart'>
+      <ShoppingCartOutlined key="edit" />
+      </Link>
+      </>
+    )
+}
+
+function UserInfo () {
+    const { userData, handleClearUserData } = useUser()
+    return (
+    <Card
+    actions={[
+      <SettingOutlined key="setting" />,
+      <CartButton />,
+      <LogoutOutlined style={{ color: 'red' }} key="logout" onClick={handleClearUserData} />,
+    ]}
+  >
+    <Meta
+      avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
+      title={`${userData?.firstname} ${userData?.lastname}`}
+      description={userData?.email}
+    />
+  </Card>
+)}
+
+function UserMenu () {
+    return (
+        <Popover placement='bottomRight' content={UserInfo} trigger="click">
+            <Avatar style={{ border: '1px black solid'}} src="https://joesch.moe/api/v1/random" />
+        </Popover>
     )
 }
