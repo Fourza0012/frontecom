@@ -1,11 +1,11 @@
+import { CartFrom } from '@/features/user/user';
 import { priceFormat } from '@/function/utils';
-import { productItem } from '@/mockup/productList';
 import { Card, Typography, Button } from 'antd'
 import Link from 'next/link';
 const { Meta } = Card
 const { Text } = Typography;
 
-export default function ProductCard (props: productItem) {
+export default function ProductCard (props: CartFrom) {
     return (
         <Card
             hoverable

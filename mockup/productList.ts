@@ -1,13 +1,6 @@
-export type productItem = {
-    id: number,
-    name: string,
-    price: number,
-    img: string,
-    status: boolean,
-    description?: string,
-    related?: number[]
-}
-export const productLists : productItem[] = [
+import { CartFrom } from "@/features/user/user";
+
+export const productLists : CartFrom[] = [
     {
         id: 1,
         name: 'Brandix Angle Grinder KZX3890PQW',

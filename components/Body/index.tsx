@@ -86,7 +86,7 @@ function UserInfo () {
     ]}
   >
     <Meta
-      avatar={<Avatar src="https://joesch.moe/api/v1/random" />}
+      avatar={<Avatar style={{ border: '1px black solid', backgroundColor: '#fff' }} src="https://joesch.moe/api/v1/random" />}
       title={`${userData?.firstname} ${userData?.lastname}`}
       description={userData?.email}
     />
@@ -96,7 +96,7 @@ function UserInfo () {
 function UserMenu () {
     return (
         <Popover placement='bottomRight' content={UserInfo} trigger="click">
-            <Avatar style={{ border: '1px black solid'}} src="https://joesch.moe/api/v1/random" />
+            <Avatar style={{ border: '1px black solid', backgroundColor: '#fff' }} src="https://joesch.moe/api/v1/random" />
         </Popover>
     )
 }

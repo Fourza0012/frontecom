@@ -3,15 +3,25 @@ import { Button, Col, Divider, Image, Row, Space, Typography } from 'antd';
 import ProductCard from "@/components/Card/ProductCard";
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
-import { productItem, productLists } from "@/mockup/productList";
+import { productLists } from "@/mockup/productList";
 import { findProduct, priceFormat } from "@/function/utils";
+import { CartFrom } from "@/features/user/user";
+import { useUser } from "@/hooks/user";
 
 const { Title, Paragraph, Text } = Typography
 
 export default function ProductDetail () {
     const { query } = useRouter()
-    const [currentItem, setCurrentItem] = useState<productItem>()
+    const { handleAddCartList } = useUser()
+    const [currentItem, setCurrentItem] = useState<CartFrom>()
+    const [amount, setAmount] = useState<number>(1)
+    function CallAddCart () {
+        if (currentItem) {
+            handleAddCartList({ product: currentItem, amount })
+        }
+    }
     useEffect(() => {
+        setAmount(1)
         setCurrentItem(findProduct(query?.id))
     }, [query])
     return (
@@ -34,11 +44,11 @@ export default function ProductDetail () {
                 <Text style={{ fontSize: '24px' }} strong>{priceFormat(currentItem.price)}</Text>
                 <Space size='large'>
                     <Space size='large' style={{ border: '1px #e7e7e7 solid' }}>
-                        <Button type="text" icon={<MinusOutlined />} />
-                           <Text strong>1</Text>
-                        <Button type="text" icon={<PlusOutlined />} />
+                        <Button onClick={() => amount > 1 && setAmount(pre => pre -= 1)} type="text" icon={<MinusOutlined />} />
+                           <Text strong>{amount}</Text>
+                        <Button onClick={() => setAmount(pre => pre += 1)} type="text" icon={<PlusOutlined />} />
                     </Space>
-                    <Button size='large' type='primary'>Add to Cart</Button>
+                    <Button onClick={CallAddCart} size='large' type='primary'>Add to Cart</Button>
                 </Space>
             </Space>
         </Col>
