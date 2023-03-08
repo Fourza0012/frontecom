@@ -6,7 +6,6 @@ import { getProducts } from '@/service/product';
 
 export default function HomeProductList () {
     const { loading, error, value = [] } = useAsync(getProducts)
-    console.log('value', value)
 
     if (loading) return <>loading</>
     if (error) return <>error</>
