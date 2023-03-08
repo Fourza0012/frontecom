@@ -12,13 +12,13 @@ export default function CartTable ({ data, callDelete } : { data: CartFrom[], ca
       key: 'img',
       align: 'center',
       render: (_, record) => (
-          <ImageCom height={150} src={record.img} alt={record.pname} />
+          <ImageCom height={150} src={`/product/product-${record.pid}.jpg`} alt={record.pname} />
       ),
     },
     {
       title: 'Product',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'pname',
+      key: 'pname',
     },
     {
       title: 'Price',

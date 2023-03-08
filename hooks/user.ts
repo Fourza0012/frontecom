@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/apps/hooks"
-import { addUserData, clearUserData, addCartList, deleteCartList, AddCartForm, DeleteCartForm } from "@/features/user/user"
+import { addUserData, clearUserData, addCartList, deleteCartList, AddCartForm, DeleteCartForm, updateCartList, CartFrom } from "@/features/user/user"
 
 export const useUser = () => {
     const dispatch = useAppDispatch()
@@ -8,6 +8,7 @@ export const useUser = () => {
     const handleAddUserData = () => dispatch(addUserData())
     const handleClearUserData = () => dispatch(clearUserData())
     const handleAddCartList = (props : AddCartForm) => dispatch(addCartList(props))
+    const handleUpdateCartList = (props: CartFrom[]) => dispatch(updateCartList(props))
     const handleDeleteCartList = (props: DeleteCartForm) => dispatch(deleteCartList(props))
     return {
         userData,
@@ -15,6 +16,7 @@ export const useUser = () => {
         handleAddUserData,
         handleClearUserData,
         handleAddCartList,
+        handleUpdateCartList,
         handleDeleteCartList
     }
 }

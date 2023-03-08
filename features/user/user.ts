@@ -11,11 +11,9 @@ export interface CartFrom {
     pid: number,
     pname: string,
     price: number,
-    img: string,
-    status: boolean,
     description?: string,
-    related?: number[],
-    amount?: number
+    amount?: number,
+    pamount?: number
 }
 
 interface UserState {
@@ -57,13 +55,16 @@ const userSlice = createSlice({
                 })
             }
         },
+        updateCartList: (state, action: PayloadAction<CartFrom[]>) => {
+            state.cartList = action.payload
+        },
         deleteCartList: (state, action: PayloadAction<DeleteCartForm>) => {
            state.cartList = state.cartList.filter(item => item.pid != action.payload.pid)
         },
     },
 })
 
-export const { addUserData, clearUserData, addCartList, deleteCartList } = userSlice.actions
+export const { addUserData, clearUserData, addCartList, updateCartList, deleteCartList } = userSlice.actions
 export default userSlice.reducer
 
 
