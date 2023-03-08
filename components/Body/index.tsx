@@ -87,7 +87,7 @@ function UserInfo () {
   >
     <Meta
       avatar={<Avatar style={{ border: '1px black solid', backgroundColor: '#fff' }} src="https://joesch.moe/api/v1/random" />}
-      title={`${userData?.firstname} ${userData?.lastname}`}
+      title={userData?.name}
       description={userData?.email}
     />
   </Card>

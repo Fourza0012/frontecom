@@ -8,5 +8,5 @@ const api = axios.create({
 export function makeRequest (url : string, options ?: any) {
     return api(url, options)
     .then(res => res.data)
-    .catch(error => Promise.reject(error?.response?.data?.message ?? 'Error'))
+    .catch(error => Promise.reject(error?.response?.data ?? 'Error'))
 }

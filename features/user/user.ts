@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface UserFrom {
-    id:number,
-    firstname: string,
-    lastname: string,
+    id: number,
+    name: string,
     email: string
 }
 
@@ -30,12 +29,11 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        addUserData: (state) => {
+        addUserData: (state, action: PayloadAction<AddUserForm>) => {
             state.userData = {
-                id: 1,
-                firstname: 'Kittichat',
-                lastname: 'Tuntialnon',
-                email: 'kittichat.tun@gmail.com',
+                id: action.payload.uid,
+                name: action.payload.name,
+                email: action.payload.email,
             }
         },
         clearUserData: (state) => {
@@ -67,6 +65,6 @@ const userSlice = createSlice({
 export const { addUserData, clearUserData, addCartList, updateCartList, deleteCartList } = userSlice.actions
 export default userSlice.reducer
 
-
+export type AddUserForm = { uid: number, name: string, email: string }
 export type AddCartForm = { product:CartFrom, amount: number }
 export type DeleteCartForm = { pid: number }

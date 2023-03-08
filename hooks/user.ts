@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/apps/hooks"
-import { addUserData, clearUserData, addCartList, deleteCartList, AddCartForm, DeleteCartForm, updateCartList, CartFrom } from "@/features/user/user"
+import { addUserData, clearUserData, addCartList, deleteCartList, AddCartForm, DeleteCartForm, updateCartList, CartFrom, AddUserForm } from "@/features/user/user"
 
 export const useUser = () => {
     const dispatch = useAppDispatch()
     const userData = useAppSelector(state => state.user.userData)
     const cartList = useAppSelector(state => state.user.cartList)
-    const handleAddUserData = () => dispatch(addUserData())
+    const handleAddUserData = (props: AddUserForm) => dispatch(addUserData(props))
     const handleClearUserData = () => dispatch(clearUserData())
     const handleAddCartList = (props : AddCartForm) => dispatch(addCartList(props))
     const handleUpdateCartList = (props: CartFrom[]) => dispatch(updateCartList(props))
