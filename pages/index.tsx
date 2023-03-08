@@ -1,6 +1,6 @@
 import { Typography, Divider, Layout } from 'antd'
-import SideMenu from '@/components/SideMenu';
-import HomeProductList from '@/components/CardList/HomeProductList';
+import SideMenu from '@/components/SideMenu'
+import HomeProductList from '@/components/CardList/HomeProductList'
 
 const { Content } = Layout
 

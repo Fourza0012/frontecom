@@ -7,8 +7,8 @@ interface UserFrom {
 }
 
 export interface CartFrom {
-    id: number,
-    name: string,
+    pid: number,
+    pname: string,
     price: number,
     img: string,
     status: boolean,
@@ -42,7 +42,7 @@ const userSlice = createSlice({
             state.userData = null
         },
         addCartList: (state, action: PayloadAction<AddCartForm>) => {
-            const pIndex = state.cartList.findIndex(item => item.id == action.payload.product.id)
+            const pIndex = state.cartList.findIndex(item => item.pid == action.payload.product.pid)
             if (pIndex >= 0) {
                 state.cartList[pIndex] = {
                     ...action.payload.product,
@@ -56,7 +56,7 @@ const userSlice = createSlice({
             }
         },
         deleteCartList: (state, action: PayloadAction<DeleteCartForm>) => {
-           state.cartList = state.cartList.filter(item => item.id != action.payload.pid)
+           state.cartList = state.cartList.filter(item => item.pid != action.payload.pid)
         },
     },
 })

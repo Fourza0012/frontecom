@@ -2,8 +2,8 @@ import { CartFrom } from "@/features/user/user";
 
 export const productLists : CartFrom[] = [
     {
-        id: 1,
-        name: 'Brandix Angle Grinder KZX3890PQW',
+        pid: 1,
+        pname: 'Brandix Angle Grinder KZX3890PQW',
         price: 649,
         img: '/product/product-13.jpg',
         status: true,
@@ -11,17 +11,17 @@ export const productLists : CartFrom[] = [
         related: [2,3,4,5]
     },
     {
-        id: 2,
-        name: 'Drill Screwdriver Brandix ALX7054 200 Watts',
+        pid: 2,
+        pname: 'Drill Screwdriver Brandix ALX7054 200 Watts',
         price: 850,
         img: '/product/category-1.jpg',
         status: false,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ornare, mi in ornare elementum, libero nibh lacinia urna, quis convallis lorem erat at purus. Maecenas eu varius nisi.',
+        description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam quam amet in minima exercitationem non harum illum, ab mollitia ducimus. Incidunt inventore delectus libero iste hic mollitia odit nihil. Nam!',
         related: [3,4,5,6]
     },
     {
-        id: 3,
-        name: 'Spanner Wrench',
+        pid: 3,
+        pname: 'Spanner Wrench',
         price: 19,
         img: '/product/product-9.jpg',
         status: true,
@@ -29,8 +29,8 @@ export const productLists : CartFrom[] = [
         related: [4,5,6,2]
     },
     {
-        id: 4,
-        name: 'Brandix Pliers',
+        pid: 4,
+        pname: 'Brandix Pliers',
         price: 24,
         img: '/product/product-7.jpg',
         status: true,
@@ -38,8 +38,8 @@ export const productLists : CartFrom[] = [
         related: [5,6,2,3]
     },
     {
-        id: 5,
-        name: 'Ash\'s Chainsaw 3.5kW',
+        pid: 5,
+        pname: 'Ash\'s Chainsaw 3.5kW',
         price: 666.99,
         img: '/product/product-12.jpg',
         status: true,
@@ -47,8 +47,8 @@ export const productLists : CartFrom[] = [
         related: [6,2,3,4]
     },
     {
-        id: 6,
-        name: 'Hand Tool Kit',
+        pid: 6,
+        pname: 'Hand Tool Kit',
         price: 149,
         img: '/product/product-10.jpg',
         status: true,
@@ -56,8 +56,8 @@ export const productLists : CartFrom[] = [
         related: [2,3,4,5]
     },
     {
-        id: 7,
-        name: 'Brandix Air Compressor DELTAKX500',
+        pid: 7,
+        pname: 'Brandix Air Compressor DELTAKX500',
         price: 1800,
         img: '/product/product-14.jpg',
         status: true,
