@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface UserFrom {
+    id:number,
     firstname: string,
     lastname: string,
     email: string
@@ -33,6 +34,7 @@ const userSlice = createSlice({
     reducers: {
         addUserData: (state) => {
             state.userData = {
+                id: 1,
                 firstname: 'Kittichat',
                 lastname: 'Tuntialnon',
                 email: 'kittichat.tun@gmail.com',

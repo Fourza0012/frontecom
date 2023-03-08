@@ -15,7 +15,7 @@ export default function ProductDetail () {
     return (
     <>
         <ProductSection currentItem={currentItem} />
-        <RelatedSection currentItem={currentItem} />
+        <RelatedSection />
     </>
     )
 }

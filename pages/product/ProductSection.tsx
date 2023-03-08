@@ -3,14 +3,19 @@ import { Button, Col, Divider, Image, Row, Space, Typography } from "antd"
 import { useState } from "react"
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { priceFormat } from "@/function/utils";
+import { useAsyncFn } from "@/hooks/useAsync";
+import { addProductToCart } from "@/service/Cart";
 const { Title, Paragraph, Text } = Typography
 
 export default function ProductSection ({ currentItem } : { currentItem : any }) {
-    const { handleAddCartList } = useUser()
+    const { userData,handleAddCartList } = useUser()
+    const { loading, error, execute: updateToCart } = useAsyncFn(addProductToCart)
     const [amount, setAmount] = useState<number>(1)
+
     function CallAddCart () {
         if (currentItem) {
             handleAddCartList({ product: currentItem, amount })
+            updateToCart(userData?.id, currentItem.pid, amount)
         }
     }
     return (
