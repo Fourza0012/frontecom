@@ -7,6 +7,9 @@ export function loginUser (email: string, password: string) {
     })
 }
 
-export function getProductById (pid : any) {
-    return makeRequest(`/product/${pid}`)
+export function registerUser (name: string, email: string, password: string) {
+    return makeRequest('/register', {
+        method: "POST",
+        data: { name, email, password }
+    })
 }
