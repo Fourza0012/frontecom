@@ -13,8 +13,10 @@ export default function Login () {
     const { email, password } = value
     login(email, password)
     .then((res : any) => {
+      const { uid, name, email, token } = res
       message.success('Login success!')
-      handleAddUserData(res)
+      localStorage.setItem('token', token)
+      handleAddUserData({ uid, name, email })
       router.push('/')
     })
     .catch((res: any) => {

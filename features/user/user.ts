@@ -37,6 +37,7 @@ const userSlice = createSlice({
             }
         },
         clearUserData: (state) => {
+            localStorage.clear()
             state.userData = null
         },
         addCartList: (state, action: PayloadAction<AddCartForm>) => {

@@ -15,3 +15,13 @@ export function findProduct (pid: string[] | number | string | undefined) {
         return undefined
     }
 }
+
+export function checkIncludeString (stringWord: string, checkArray: string[]) {
+    let match = false
+    for(const check of checkArray) {
+        if (stringWord.includes(check)) {
+            match = true
+        }
+    }
+    return match
+}

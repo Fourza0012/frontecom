@@ -13,3 +13,13 @@ export function registerUser (name: string, email: string, password: string) {
         data: { name, email, password }
     })
 }
+
+export function checkLogin () {
+    const userToken = localStorage.getItem('token')
+    return makeRequest('/checklogin', {
+        method: "POST",
+        headers: {
+            'Authorization': `Bearer ${userToken}` 
+        }
+    })
+}

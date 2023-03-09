@@ -2,7 +2,7 @@ import CartTable from "@/components/Table/CartTable";
 import { useAsync, useAsyncFn } from "@/hooks/useAsync";
 import { useUser } from "@/hooks/user";
 import { deleteProductCartById, getProductCartByUser } from "@/service/Cart";
-import { Button, Card, Col, Divider, Row, Space, Typography } from 'antd';
+import { Button, Card, Col, Divider, message, Row, Space, Typography } from 'antd';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -18,6 +18,8 @@ export default function Cart () {
     const CallDeleteCart = (pid: number) => {
         handleDeleteCartList({ pid })
         deleteFromCart(userData?.id, pid)
+        .then(() => message.success(`Delete product from cart`))
+        .catch((res: any) => message.error(res))
     }
     useEffect(() => {
         if (userData?.id) {

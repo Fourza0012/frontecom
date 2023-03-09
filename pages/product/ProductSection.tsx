@@ -1,5 +1,5 @@
 import { useUser } from "@/hooks/user"
-import { Button, Col, Divider, Image, Row, Space, Typography } from "antd"
+import { Button, Col, Divider, Image, message, Row, Space, Typography } from "antd"
 import { useState } from "react"
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { priceFormat } from "@/function/utils";
@@ -8,14 +8,16 @@ import { addProductToCart } from "@/service/Cart";
 const { Title, Paragraph, Text } = Typography
 
 export default function ProductSection ({ currentItem } : { currentItem : any }) {
+    const avalibleAdd = currentItem.amount > 0
     const { userData,handleAddCartList } = useUser()
-    const { loading, error, execute: updateToCart } = useAsyncFn(addProductToCart)
-    const [amount, setAmount] = useState<number>(1)
-
+    const { execute: updateToCart } = useAsyncFn(addProductToCart)
+    const [amount, setAmount] = useState<number>(avalibleAdd ? 1 : 0)
     function CallAddCart () {
         if (currentItem) {
             handleAddCartList({ product: currentItem, amount })
             updateToCart(userData?.id, currentItem.pid, amount)
+            .then(() => message.success(`Add ${amount} ${currentItem.pname} to Your Cart`))
+            .catch((res: any) => message.error(res))
         }
     }
     return (
@@ -31,17 +33,20 @@ export default function ProductSection ({ currentItem } : { currentItem : any })
             </Paragraph>
             <Divider />
             <Space direction='vertical'>
-                <div>
-                    <Text strong style={{ color: '#6F6F6F' }}>Availability: </Text> <Text type={currentItem.status ? 'success' : 'danger'}>{currentItem.status ? 'In Stock' : 'Out of Stock'}</Text>
-                </div>
+                <Space>
+                    <Text strong style={{ color: '#6F6F6F' }}>
+                        Availability: 
+                    </Text>
+                    <Text type={avalibleAdd ? 'success' : 'danger'}>{avalibleAdd ? 'In Stock' : 'Out of Stock'} ({currentItem.amount})</Text>
+                </Space>
                 <Text style={{ fontSize: '24px' }} strong>{priceFormat(currentItem.price)}</Text>
                 <Space size='large'>
                     <Space size='large' style={{ border: '1px #e7e7e7 solid' }}>
-                        <Button onClick={() => amount > 1 && setAmount(pre => pre -= 1)} type="text" icon={<MinusOutlined />} />
+                        <Button disabled={!avalibleAdd} onClick={() => amount > 1 && setAmount(pre => pre -= 1)} type="text" icon={<MinusOutlined />} />
                            <Text strong>{amount}</Text>
-                        <Button onClick={() => setAmount(pre => pre += 1)} type="text" icon={<PlusOutlined />} />
+                        <Button disabled={!avalibleAdd} onClick={() => amount < currentItem.amount && setAmount(pre => pre += 1)} type="text" icon={<PlusOutlined />} />
                     </Space>
-                    <Button onClick={CallAddCart} size='large' type='primary'>Add to Cart</Button>
+                    <Button disabled={!avalibleAdd || amount < 1} onClick={CallAddCart} size='large' type='primary'>Add to Cart</Button>
                 </Space>
             </Space>
         </Col>

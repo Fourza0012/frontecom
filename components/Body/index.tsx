@@ -1,8 +1,13 @@
-import { ReactNode, CSSProperties } from 'react'
-import { Layout, Image, Button, Space, Typography, Popover, Card, Avatar } from 'antd'
+import { ReactNode, CSSProperties, useEffect } from 'react'
+import { Layout, Image, Button, Space, Typography, Popover, Card, Avatar, message } from 'antd'
 import Link from 'next/link';
-import { useUser } from '@/hooks/user';
+import { useCheckLogin, useUser } from '@/hooks/user';
 import { SettingOutlined,LogoutOutlined,ShoppingCartOutlined } from '@ant-design/icons';
+import { checkLogin } from '@/service/user';
+import { useAsync } from '@/hooks/useAsync';
+import { useRouter } from 'next/router';
+import { checkIncludeString } from '@/function/utils';
+import { userPage } from '@/config/config';
 
 const { Meta } = Card;
 
@@ -94,6 +99,7 @@ function UserInfo () {
 )}
 
 function UserMenu () {
+    useCheckLogin()
     return (
         <Popover placement='bottomRight' content={UserInfo} trigger="click">
             <Avatar style={{ border: '1px black solid', backgroundColor: '#fff' }} src="https://joesch.moe/api/v1/random" />

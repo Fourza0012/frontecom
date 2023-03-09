@@ -3,4 +3,6 @@ const config = {
     currentAPI: `${siteURL}/api`
 }
 
+export const userPage = ['/cart']
+
 export default config

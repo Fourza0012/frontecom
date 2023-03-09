@@ -9,7 +9,7 @@ export default function CartTable ({ data, callDelete } : { data: CartFrom[], ca
     {
       title: 'Image',
       ellipsis: true,
-      key: 'img',
+      key: 'pid',
       align: 'center',
       render: (_, record) => (
           <ImageCom height={150} src={`/product/product-${record.pid}.jpg`} alt={record.pname} />
