@@ -16,10 +16,12 @@ export default function Cart () {
     const { execute: deleteFromCart } = useAsyncFn(deleteProductCartById)
     const { value: userCart } = useAsync(() => getProductCartByUser(userData?.id), [userData])
     const CallDeleteCart = (pid: number) => {
-        handleDeleteCartList({ pid })
-        deleteFromCart(userData?.id, pid)
-        .then(() => message.success(`Delete product from cart`))
-        .catch((res: any) => message.error(res))
+        if (userData) {
+            handleDeleteCartList({ pid })
+            deleteFromCart(userData?.id, pid)
+            .then(() => message.success(`Delete product from cart`))
+            .catch((res: any) => message.error(res))
+        }
     }
     useEffect(() => {
         if (userData?.id) {
@@ -31,21 +33,23 @@ export default function Cart () {
         
     }, [userData])
     return (
-        <div style={{ padding: '0 2%' }}>
+        <Space direction='vertical'>
             <Title style={{ marginTop: 0 }}>Shopping Cart</Title>
             <CartTable data={cartList} callDelete={CallDeleteCart} />
-            <Row gutter={[0,30]}>
-                <Col offset={20} span={4}>
+            <Row justify='end'>
+                <Col md={12} lg={8} xl={6} span={24}>
                     <Link href='/'>
                     <Button block type='text' size='large' style={{ color: '#404040' }}>
                         <strong>Continue Shopping</strong>
                     </Button>
                     </Link>
                 </Col>
-                <Col offset={16} span={8}>
+            </Row>
+            <Row justify='end'>
+                <Col md={14} lg={14} xl={8} span={24}>
                     <CartTotal />
                 </Col>
             </Row>
-        </div>
+        </Space>
     )
 }

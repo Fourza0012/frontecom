@@ -12,7 +12,12 @@ export default function CartTable ({ data, callDelete } : { data: CartFrom[], ca
       key: 'pid',
       align: 'center',
       render: (_, record) => (
-          <ImageCom height={150} src={`/product/product-${record.pid}.jpg`} alt={record.pname} />
+          <ImageCom
+            width='100%'
+            src={`/product/product-${record.pid}.jpg`} 
+            alt={record.pname}
+            style={{ maxWidth: '150px' }}
+          />
       ),
     },
     {
@@ -28,7 +33,7 @@ export default function CartTable ({ data, callDelete } : { data: CartFrom[], ca
       render: (_, record) => (
           <Space>
           <strong style={{ fontSize: '16px' }}>
-          ${record.price} 
+          ${record.price * (record?.amount || 1)} 
           </strong>
           <small>({record.amount})</small>
           </Space>
@@ -39,9 +44,7 @@ export default function CartTable ({ data, callDelete } : { data: CartFrom[], ca
       key: 'action',
       align: 'center',
       render: (_, record) => (
-        <Space size="middle">
           <Button onClick={() =>callDelete(record.pid)}>Delete</Button>
-        </Space>
       )
     }
   ]

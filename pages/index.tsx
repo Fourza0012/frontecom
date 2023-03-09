@@ -1,5 +1,4 @@
 import { Typography, Divider, Layout } from 'antd'
-import SideMenu from '@/components/SideMenu'
 import HomeProductList from '@/components/CardList/HomeProductList'
 
 const { Content } = Layout
@@ -12,7 +11,6 @@ export default function Home() {
       <Title style={{ marginTop: '0px' }}>Product</Title>
       <Divider />
       <Layout>
-        <SideMenu />
         <Content
             style={{
               padding: '0px 24px',

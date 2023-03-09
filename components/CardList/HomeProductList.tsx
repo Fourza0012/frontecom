@@ -13,8 +13,8 @@ export default function HomeProductList () {
     return (
         <>
         <Row gutter={[16, 16]}>
-            {value.map((item, key) => (
-                <Col key={key} span='6'>
+            {value.map((item : any, key: any) => (
+                <Col key={key} sm={8} md={8} lg={8} xl={6} span={24}>
                     <ProductCard {...item} />
                 </Col>
             ))}

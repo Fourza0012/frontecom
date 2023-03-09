@@ -8,6 +8,7 @@ export default function ImageCom (props : ImageProps) {
             src={props.src}
             alt={props.alt}
             preview={false}
+            style={props.style}
         />
     )
 }

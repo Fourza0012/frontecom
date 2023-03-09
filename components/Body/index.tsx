@@ -25,7 +25,7 @@ const headerStyle: CSSProperties = {
   
 const contentStyle: CSSProperties = {
     minHeight: 120,
-    padding: '3% 5%'
+    padding: '3% 4%'
 }
   
 const footerStyle: CSSProperties = {
