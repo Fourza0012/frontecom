@@ -17,13 +17,13 @@ export default function HeaderComponent () {
     const [onMobile, setOnMobile] = useState(false)
     return (
         <Header style={headerStyle}>
-            <Layout>
-                <Content style={{ backgroundColor: '#1677ff', }}>
+            <Layout style={{ backgroundColor: '#00000000', }}>
+                <Content style={{ backgroundColor: '#00000000', }}>
                     <Link href='/'>
                         <Image src='/logo/logo.svg' preview={false} />
                     </Link>
                 </Content>
-                <Sider breakpoint='md' onBreakpoint={(broken) => setOnMobile(broken)} style={{ backgroundColor: '#1677ff', }}>
+                <Sider breakpoint='md' onBreakpoint={(broken) => setOnMobile(broken)} style={{ backgroundColor: '#00000000', }}>
                     <Row style={{ height: '100%' }} justify='end' align='middle' gutter={10}>
                         {userData ? <UserMenu /> : <NoUserMenu onMobile={onMobile} />}
                     </Row>
